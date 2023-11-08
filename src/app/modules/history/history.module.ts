@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     SharedModule,
     HistoryRoutingModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class HistoryModule { }

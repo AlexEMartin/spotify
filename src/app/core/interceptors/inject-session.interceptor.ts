@@ -20,7 +20,6 @@ export class InjectSessionInterceptor implements HttpInterceptor {
       newRequest = request.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
-          CUSTOM_HEADER: 'HOLUS'
         }
       });
 

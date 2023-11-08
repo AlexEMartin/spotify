@@ -15,5 +15,5 @@ export class AuthService {
 
     const body = { email, password };
 
-    return this.http.post(`${this.URL}/auth/login`, body)
+    return this.http.post(`${this.URL}/api/1.0/auth/login`, body)
 }}

@@ -24,7 +24,7 @@ export class TrackService {
 
 
    getAllTracks$(): Observable<any>{
-    return this.httpClient.get(`${this.URL}/tracks`)
+    return this.httpClient.get(`${this.URL}/api/1.0/tracks`)
     .pipe(
       map(({ data }:any) => {
         return data;
@@ -37,7 +37,7 @@ export class TrackService {
    }
 
    getRandomTracks$(): Observable<any>{
-    return this.httpClient.get(`${this.URL}/tracks`)
+    return this.httpClient.get(`${this.URL}/api/1.0/tracks`)
     .pipe(
       mergeMap(({ data }:any) => this.skipById(data, 1)),
       // map((reversedData:any) => {

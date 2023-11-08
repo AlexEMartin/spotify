@@ -13,7 +13,7 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   serchTracks$(term: string): Observable<any> {
-    return this.http.get(`${this.URL}/tracks?src=${term}`)
+    return this.http.get(`${this.URL}/api/1.0/tracks/${term}`)
     .pipe(
       map((res: any) => res.data)
     )

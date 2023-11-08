@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SearchService } from '@modules/history/services/search.service';
+import { TrackService } from '@modules/tracks/services/track.service';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -11,9 +12,10 @@ export class HistoryPageComponent implements OnInit {
 
   listResults$: Observable<any> = of([]);
 
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService, private trackService: TrackService) { }
 
   ngOnInit(): void {
+    this.listResults$ = this.trackService.getAllTracks$();
   }
 
   receiveData(event: string): void {
