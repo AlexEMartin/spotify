@@ -2,18 +2,18 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
-export const sessionGuard = (): boolean => {
+export const adminGuard = (): boolean => {
   const cookieService = inject(CookieService);
   const router = inject(Router);
 
   try {
-    const token: boolean = cookieService.check('token');
+    const role: string = cookieService.get('role');
 
-    if (!token) {
-      router.navigate(['/', 'auth']);
+    if (role !== 'admin') {
+      router.navigate(['/']);
     }
-    
-    return token;
+
+    return true;
   } catch (e) {
     console.log('Algo sucedio ?? 🔴', e);
     return false;
