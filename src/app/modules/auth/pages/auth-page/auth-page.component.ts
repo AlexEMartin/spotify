@@ -34,6 +34,7 @@ export class AuthPageComponent implements OnInit {
         console.log('Sesion iniciada exitosamente', responseOk);
         const { tokenSession, data } = responseOk;
         this.cookie.set('token', tokenSession, 4, '/');
+        this.cookie.set('role', data.role, 4, '/');
         this.router.navigate(['/', 'tracks'])
       },
       (error) => {
