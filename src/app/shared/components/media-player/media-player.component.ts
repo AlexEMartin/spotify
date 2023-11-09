@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TrackModel } from '@core/models/tracks.model';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+// import { TrackModel } from '@core/models/tracks.model';
 import { MultimediaService } from '@shared/services/multimedia.service';
-// import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-media-player',
@@ -9,24 +9,32 @@ import { MultimediaService } from '@shared/services/multimedia.service';
   styleUrls: ['./media-player.component.css'],
 })
 export class MediaPlayerComponent implements OnInit, OnDestroy {
-  mockCover: TrackModel = {
-    album: 'BZRP Music Sessions',
-    cover:
-      'https://is5-ssl.mzstatic.com/image/thumb/Features125/v4/9c/b9/d0/9cb9d017-fcf6-28c6-81d0-e9ac5b0f359e/pr_source.png/800x800cc.jpg',
-    name: 'Snow Tha Product || BZRP Music Sessions #39',
-    url: '',
-    _id: 39,
-  };
+  @ViewChild('progressBar') progressBar: ElementRef = new ElementRef('');
+  listObservers$: Array<Subscription> = [];
+  state: string = 'paused';
 
-  // listObservers$: Array<Subscription> = [];
-
-  constructor(private multimediaService: MultimediaService) {}
+  constructor(public multimediaService: MultimediaService) {}
 
   ngOnInit(): void {
-    const observer1$ = this.multimediaService.myObservable1$
-  }
+
+    const observer1$ = this.multimediaService.playerStatus$.subscribe((status: string) => {
+      this.state = status;
+    })
+
+    this.listObservers$ = [observer1$];
+
+  } 
 
   ngOnDestroy(): void {
-    // this.listObservers$.forEach((observer) => observer.unsubscribe());
+    this.listObservers$.forEach((observer) => observer.unsubscribe());
+  }
+
+  handlePosition(event: MouseEvent): void {
+    const elNative:HTMLElement = this.progressBar.nativeElement;
+    const { clientX } = event;
+    const { x, width } = elNative.getBoundingClientRect();
+    const clickX = clientX - x;
+    const percentageFromX = (clickX * 100) / width;
+    this.multimediaService.seekAudio(percentageFromX);
   }
 }

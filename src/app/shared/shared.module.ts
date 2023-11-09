@@ -10,6 +10,7 @@ import { PlayListBodyComponent } from './components/play-list-body/play-list-bod
 import { RouterModule } from '@angular/router';
 import { OrderListPipe } from './pipes/order-list.pipe';
 import { ImgBrokenDirective } from './directives/img-broken.directive';
+import { PlayListAdminComponent } from './components/play-list-admin/play-list-admin.component';
 
 
 
@@ -23,7 +24,8 @@ import { ImgBrokenDirective } from './directives/img-broken.directive';
     PlayListHeaderComponent,
     PlayListBodyComponent,
     OrderListPipe,
-    ImgBrokenDirective
+    ImgBrokenDirective,
+    PlayListAdminComponent
   ],
   exports: [
     SideBarComponent,
@@ -34,7 +36,8 @@ import { ImgBrokenDirective } from './directives/img-broken.directive';
     PlayListHeaderComponent,
     PlayListBodyComponent,
     OrderListPipe,
-    ImgBrokenDirective
+    ImgBrokenDirective,
+    PlayListAdminComponent
   ],
   imports: [
     CommonModule,

@@ -30,7 +30,7 @@ export class TrackService {
         return data;
       }),
       catchError((err) => {
-        console.log('Algo salió muy mal 😒', err);
+        alert('Error de conexión con el servidor =( , intenta más tarde');
         return of([])
       })
     )
