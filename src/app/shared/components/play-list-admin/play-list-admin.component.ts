@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
+import { AdminService } from '@modules/admin/services/admin.service';
 
 @Component({
   selector: 'app-play-list-admin',
@@ -11,7 +12,7 @@ export class PlayListAdminComponent implements OnInit{
   @Input() tracks:Array<TrackModel> = [];
   optionSort: { property: string | null, order: string } = { property: null, order: 'asc' };
 
-  constructor() { }
+  constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +24,17 @@ export class PlayListAdminComponent implements OnInit{
       order: order === 'asc' ? 'desc' : 'asc'
     }
     console.log(this.optionSort);
+  }
 
+  deleteTrack(track: any): void {
+    const { uid } = track;
+    this.adminService.deleteTrack$(uid).subscribe(
+      (responseOk) => {
+        console.log('Eliminado exitosamente', responseOk);
+      },
+      (error) => {
+        console.log('Error al eliminar track', error);
+      }
+    );
   }
 }

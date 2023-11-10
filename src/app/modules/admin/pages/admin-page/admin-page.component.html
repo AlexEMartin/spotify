@@ -1,1 +1,42 @@
+
+<div class="form-container">
+  <form (ngSubmit)="sendAddForm()" [formGroup]="addForm" class="form">
+    <div class="form-group">
+      <input
+        formControlName="name"
+        type="text"
+        placeholder="Name"
+        class="form-input"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        formControlName="album"
+        type="text"
+        placeholder="Album"
+        class="form-input"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        formControlName="cover"
+        type="text"
+        placeholder="Cover"
+        class="form-input"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        formControlName="artist"
+        type="text"
+        placeholder="Artist"
+        class="form-input"
+      />
+    </div>
+    <div class="form-action">
+      <button [disabled]="addForm.invalid" class="btn">Añadir</button>
+    </div>
+  </form>
+</div>
+
 <app-play-list-admin [tracks]="listResults$ | async"></app-play-list-admin>

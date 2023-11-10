@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { TrackModel } from '@core/models/tracks.model';
-import { Observable, catchError, map, mergeMap, of } from 'rxjs';
+import { Observable, catchError, map, mergeMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-// import { TrackModel } from '@core/models/tracks.model';
 
 
 @Injectable({
@@ -13,7 +13,7 @@ export class TrackService {
 
   private readonly URL = environment.api;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   private skipById(listTracks:TrackModel[], id:number):Promise<TrackModel[]> {
     return new Promise((resolve, reject) => {
@@ -22,16 +22,16 @@ export class TrackService {
     })
   }
 
-
    getAllTracks$(): Observable<any>{
     return this.httpClient.get(`${this.URL}/api/1.0/tracks`)
     .pipe(
       map(({ data }:any) => {
+        console.log(data);
         return data;
       }),
       catchError((err) => {
         alert('Error de conexión con el servidor =( , intenta más tarde');
-        return of([])
+        return this.router.navigate(['/auth/login']);
       })
     )
    }
@@ -40,9 +40,6 @@ export class TrackService {
     return this.httpClient.get(`${this.URL}/api/1.0/tracks`)
     .pipe(
       mergeMap(({ data }:any) => this.skipById(data, 1)),
-      // map((reversedData:any) => {
-      //   return reversedData.filter((track:TrackModel) => track._id !== 1);
-      // }),
     )
    }
 }

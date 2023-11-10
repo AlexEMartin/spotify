@@ -1,4 +1,4 @@
-<div class="play-list-body">
+<div class="play-list-admin-body">
     <ul class="play-list-table-header">
         <li (click)="changeSort('name')">Nombre ❤</li>
         <li (click)="changeSort('album')">Opciones 🆗</li>
@@ -9,7 +9,7 @@
         </li>
         <li class="track-name-opacity">
             <span class="action">Editar 🖊️</span>
-            <span class="delete action">Eliminar ❌</span>
+            <span (click)="deleteTrack(track)" class="delete action">Eliminar ❌</span>
         </li>
     </ul>
 </div>
