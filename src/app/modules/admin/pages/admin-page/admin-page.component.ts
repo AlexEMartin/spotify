@@ -38,13 +38,15 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
-  sendAddForm(): void {
+  sendAddForm($event:any): void {
+    $event.preventDefault();
     const { name, album, cover, artist } = this.addForm.value;
     this.adminService.addNewTrack$(name, album, cover, artist).subscribe(
       (responseOk) => {
         this.listResults$ = this.trackService.getAllTracks$();
         console.log('Agregado exitosamente', responseOk);
         console.log('Data', this.listResults$)
+        this.addForm.reset();
       },
       (error) => {
         console.log('Error al agregar track', error);

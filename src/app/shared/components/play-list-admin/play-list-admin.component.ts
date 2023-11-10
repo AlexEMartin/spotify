@@ -31,6 +31,8 @@ export class PlayListAdminComponent implements OnInit{
     this.adminService.deleteTrack$(uid).subscribe(
       (responseOk) => {
         console.log('Eliminado exitosamente', responseOk);
+        const filter = this.tracks.filter((track) => track.uid !== uid);
+        this.tracks = filter;
       },
       (error) => {
         console.log('Error al eliminar track', error);

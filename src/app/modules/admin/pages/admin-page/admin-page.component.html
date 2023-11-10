@@ -1,6 +1,7 @@
 
 <div class="form-container">
-  <form (ngSubmit)="sendAddForm()" [formGroup]="addForm" class="form">
+  <form (ngSubmit)="sendAddForm($event)" [formGroup]="addForm" class="form">
+    <h2>Añadir canción</h2>
     <div class="form-group">
       <input
         formControlName="name"
