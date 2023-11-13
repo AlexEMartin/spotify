@@ -3,20 +3,18 @@
         <li (click)="changeSort('name')">Nombre ❤</li>
         <li (click)="changeSort('album')">Opciones 🆗</li>
     </ul>
-    <div class="play-list-rows" *ngFor="let track of tracks | orderList:optionSort.property:optionSort.order; let i = index">
+    <div class="play-list-rows" *ngFor="let track of tracks | orderList:optionSort.property:optionSort.order">
         <div class="track-name">
             <ng-container *ngTemplateOutlet="coverSection;context:{track:track}"></ng-container>
         </div>
         <div class="track-name-opacity">
             <div class="edit-input">
-                <span (click)="pickElement(i)" class="action">Editar 🖊️</span>
-                <!-- Edit Form -->
-                <form [ngClass]="{'selected': i === selectedElement}" class="edit-form" action="">
-                    <input type="text">
-                    <button type="submit">Guardar</button>
+                <form [formGroup]="editForm" (ngSubmit)="editTrackName(track, name.value)">
+                    <input placeholder="Editar Nombre" type="text" id="name" name="name" #name>
+                    <button type="submit">Editar</button>
                 </form>
             </div>
-            <!-- <span (click)="deleteTrack(track)" class="delete action">Eliminar ❌</span> -->
+            <span (click)="deleteTrack(track)" class="delete action">Eliminar ❌</span>
         </div>
     </div>
 </div>

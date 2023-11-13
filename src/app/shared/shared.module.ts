@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { OrderListPipe } from './pipes/order-list.pipe';
 import { ImgBrokenDirective } from './directives/img-broken.directive';
 import { PlayListAdminComponent } from './components/play-list-admin/play-list-admin.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -25,7 +26,7 @@ import { PlayListAdminComponent } from './components/play-list-admin/play-list-a
     PlayListBodyComponent,
     OrderListPipe,
     ImgBrokenDirective,
-    PlayListAdminComponent
+    PlayListAdminComponent,
   ],
   exports: [
     SideBarComponent,
@@ -37,11 +38,12 @@ import { PlayListAdminComponent } from './components/play-list-admin/play-list-a
     PlayListBodyComponent,
     OrderListPipe,
     ImgBrokenDirective,
-    PlayListAdminComponent
+    PlayListAdminComponent,
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

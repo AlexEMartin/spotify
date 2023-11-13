@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Subject, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -7,18 +8,26 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class SearchComponent implements OnInit {
 
-  @Output() callbackData: EventEmitter<any> = new EventEmitter();
+  @Output() callbackData: EventEmitter<any> = new EventEmitter()
+  private searchSubject = new Subject<string>();
 
-  src: string = '';
+  src: string = ''
 
-  constructor() { }
-
-  ngOnInit(): void {
-    
+  constructor() {
+    this.searchSubject.pipe(
+      debounceTime(500)
+    ).subscribe((debouncedTerm: string) => {
+      if (debouncedTerm.length >= 3) { 
+        this.callbackData.emit(debouncedTerm); 
+      }
+    });
   }
 
-  handleSearch(term: string): void {
-    this.callbackData.emit(term);
+  ngOnInit(): void {
+  }
+
+  callSearch(term: any): void {
+    this.searchSubject.next(term);
   }
 
 }
