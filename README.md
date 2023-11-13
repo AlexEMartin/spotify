@@ -11,7 +11,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 In this project you will be able tu use the music player, jump to different parts of each song and more. You can also search your favorites tracks.
 
-Also if you have and admin access you would be able to upload new tracks, edit them and delete existing tracks. If you have this kind of access you would notice the admin section on your sidebar.
+Also if you have an admin access you would be able to upload new tracks, edit them and delete existing tracks. If you have this kind of access you would notice the admin section on your sidebar.
 
 ## Development server
 
