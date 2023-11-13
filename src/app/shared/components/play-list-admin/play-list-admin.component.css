@@ -33,6 +33,10 @@
 }
 
 .play-list-rows .track-name-opacity {
+    display: flex;
+    padding-left: 15rem;
+    align-items: center;
+    width: 700px;
     opacity: .7;
     font-weight: 300;
 }
@@ -63,4 +67,24 @@
 
 .action {
     cursor: pointer;
+}
+
+.edit-input {
+    display: flex;
+}
+
+input {
+    width: 150px;
+    height: 20px;
+    margin: 0px 5px;
+}
+
+.edit-form {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selected {
+    display: block;
 }
